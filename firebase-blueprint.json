@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account in Rave Nation Poland (Fan or Artist)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "name": { "type": "string", "maxLength": 120 },
+        "role": { "type": "string", "enum": ["user", "artist", "editor", "admin"] },
+        "avatar": { "type": "string", "maxLength": 1024 },
+        "cityPreference": { "type": "string", "maxLength": 100 },
+        "favoriteGenres": { "type": "array" },
+        "artistProfileId": { "type": "string", "maxLength": 128 },
+        "fanProfile": { "type": "object" },
+        "artistProfile": { "type": "object" },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "email", "name", "role", "createdAt"]
+    },
+    "RaveEvent": {
+      "title": "RaveEvent",
+      "description": "Underground electronic rave event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "date": { "type": "string", "maxLength": 30 },
+        "venueName": { "type": "string", "maxLength": 150 },
+        "cityName": { "type": "string", "maxLength": 100 },
+        "organizerId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "title", "date", "venueName", "cityName", "organizerId", "createdAt"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Attendee ticket order and digital door pass",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "orderRef": { "type": "string", "maxLength": 64 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "eventId": { "type": "string", "maxLength": 128 },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["confirmed", "cancelled", "refunded"] },
+        "bookedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "orderRef", "userId", "eventId", "totalAmount", "status", "bookedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles containing role-specific Fan and Artist profiles"
+    },
+    "/events/{eventId}": {
+      "schema": "RaveEvent",
+      "description": "Underground electronic music events directory"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Ticket passes and attendee bookings"
+    }
+  }
+}

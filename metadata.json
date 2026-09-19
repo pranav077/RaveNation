@@ -1,0 +1,6 @@
+{
+  "name": "RAVE NATION Poland",
+  "description": "Poland's electronic music, techno, psychedelic, and underground rave platform featuring curated events, artist profiles, music releases, scene news, and ticket booking across major Polish cities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
